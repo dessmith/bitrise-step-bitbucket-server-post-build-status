@@ -114,7 +114,7 @@ else
 curl $BITBUCKET_API_ENDPOINT \
   -X POST \
   -i \
-  -H "Authorization: Bearer $(http_token)" \
+  -H "Authorization: Bearer $http_token" \
   -H 'Content-Type: application/json' \
   --data-binary \
       $"{
