@@ -10,13 +10,19 @@ if [ -z "$domain" ]; then
 fi
 
 if [ -z "$username" ]; then
-  INVALID_INPUT=true
   echo "- Missing input field: username"
 fi
 
 if [ -z "$password" ]; then
-  INVALID_INPUT=true
   echo "- Missing input field: password"
+fi
+
+if [ -z "$http_token" ]; then
+  echo "- Missing input field: password"
+fi
+
+if [ -z "$username" ] && [ -z "$password" ] && [ -z "$http_token" ]; then
+  INVALID_INPUT=true
 fi
 
 if [ -z "$git_clone_commit_hash" ]; then
@@ -85,6 +91,8 @@ echo "API Endpoint: $BITBUCKET_API_ENDPOINT"
 #
 # Docs: https://developer.atlassian.com/server/bitbucket/how-tos/updating-build-status-for-commits/
 
+# If NO HTTP Token, then use username and password
+if [ -z "$http_token" ]; then
 curl $BITBUCKET_API_ENDPOINT \
   -X POST \
   -i \
@@ -99,3 +107,23 @@ curl $BITBUCKET_API_ENDPOINT \
         \"description\": \"workflow: $triggered_workflow_id\"
        }" \
    --compressed
+
+else
+
+# else use the HTTP token
+curl $BITBUCKET_API_ENDPOINT \
+  -X POST \
+  -i \
+  -H "Authorization: Bearer $(http_token)" \
+  -H 'Content-Type: application/json' \
+  --data-binary \
+      $"{
+        \"state\": \"$BITBUCKET_BUILD_STATE\",
+        \"key\": \"Bitrise - Build $triggered_workflow_id\",
+        \"name\": \"Bitrise $app_title ($triggered_workflow_id) #$build_number\",
+        \"url\": \"$build_url\",
+        \"description\": \"workflow: $triggered_workflow_id\"
+       }" \
+   --compressed
+   
+fi

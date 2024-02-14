@@ -1,9 +1,9 @@
 title: |-
-  Bitbucket server post build status
+  Bitbucket Server Build Status
 summary: |
-  Post build status to bitbucket server
+  Posts build status to bitbucket server
 description: |
-  Post build status to bitbucket server
+  Posts build status to bitbucket server
 website: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status
 source_code_url: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status
 support_url: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status/issues
@@ -34,13 +34,20 @@ inputs:
       title: Bitbucket Server username
       summary: The username used to make REST calls to bitbucket server
       description: The username used to make REST calls to bitbucket server
-      is_required: true
+      is_required: false
   - password:
     opts:
       title: Bitbucket Server password
       summary: The password for the bitbucket server username
       description: The password for the bitbucket server username
-      is_required: true
+      is_required: false
+      is_sensitive: true
+  - http_token:
+    opts:
+      title: Bitbucket Server HTTP Token
+      summary: The HTTP Token for the bitbucket server, not required if using username and password
+      description: When using HTTP token leave username and password blank
+      is_required: false
       is_sensitive: true
   - preset_status: "AUTO"
     opts:
