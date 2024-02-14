@@ -9,19 +9,8 @@ if [ -z "$domain" ]; then
   echo "- Missing input field: domain"
 fi
 
-if [ -z "$username" ]; then
-  echo "- Missing input field: username"
-fi
-
-if [ -z "$password" ]; then
-  echo "- Missing input field: password"
-fi
-
-if [ -z "$http_token" ]; then
-  echo "- Missing input field: password"
-fi
-
 if [ -z "$username" ] && [ -z "$password" ] && [ -z "$http_token" ]; then
+  echo "- Missing credentials, please add username & password OR Http token"
   INVALID_INPUT=true
 fi
 

@@ -32,13 +32,13 @@ inputs:
   - username:
     opts:
       title: Bitbucket Server username
-      summary: The username used to make REST calls to bitbucket server
+      summary: The username used to make REST calls to bitbucket server, not required if using HTTP Token
       description: The username used to make REST calls to bitbucket server
       is_required: false
   - password:
     opts:
       title: Bitbucket Server password
-      summary: The password for the bitbucket server username
+      summary: The password for the bitbucket server username, not required if using HTTP Token
       description: The password for the bitbucket server username
       is_required: false
       is_sensitive: true
