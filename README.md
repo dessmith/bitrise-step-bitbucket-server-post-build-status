@@ -4,6 +4,8 @@ Post build status to bitbucket server
 
 See step.yml for inputs
 
+With support for HTTP Token authentication
+
 ### Basic example
 
 Typically you want to notify bitbucket when a build is started and when a build has finished. You can do this by adding this step twice to the steps of your workflow:
